@@ -1,109 +1,128 @@
-# Trabalho-hackathon
+# PROJETO: Cidade Segura
 
-EQUIPE: SeleNai
-PROJETO: Cidade Segura
-
-INTEGRANTES:
-
-Diego
-
-Elvis 
-
-Kaloa 
-
-Pedro Henrique 
-
-Richard 
-
-PROBLEMA E DESAFIO ABORDADO:
-A falta de segurança em bairros e ruas é uma preocupação constante para os cidadãos. A escassez de informações centralizadas e em tempo real sobre incidentes locais dificulta a prevenção e a tomada de decisões rápidas pela comunidade. O Cidade Segura nasce para mitigar esse problema, conectando moradores e fornecendo ferramentas colaborativas para aumentar a vigilância comunitária e a segurança coletiva.
-
-TECNOLOGIAS UTILIZADAS:
-
-Frontend: HTML5, CSS3, JavaScript (ou React / Vue)
-
-Backend: Node.js (Express)
-
-Banco de Dados: PostgreSQL:
-
-Mapas/APIs: Google Maps API:
-
-FUNCIONALIDADES IMPLEMENTADAS:
-
-Denúncias Anônimas: Envio de relatos sobre problemas ou ocorrências sem expor a identidade do usuário.
-
-Mapa de Calor / Áreas de Risco: Visualização interativa e em tempo real de zonas perigosas baseada nas denúncias.
-
-Alertas de Proximidade: Notificações em tempo real para moradores que estejam próximos a uma ocorrência recente.
-
-Botão de Emergência Rápido: Atalho para discagem direta de serviços de emergência locais como o 190.
-
-ESTRUTURA DO BANCO DE DADOS:
-O sistema utiliza um banco de dados para gerenciar usuários, denúncias e localizações.
-
-Tabela Usuarios: contendo ID, nome (opcional), email e senha criptografada.
-
-Tabela Denuncias: contendo ID, tipo de incidente, descrição, latitude, longitude, data/hora e status.
-
-Tabela Alertas: contendo ID, ID da denúncia, raio de alcance e data de envio.
-
-MODELO DE MONETIZAÇÃO:
-Como o projeto visa a segurança pública, o modelo de monetização sugerido é híbrido:
-
-Modelo Freemium e Parcerias B2B: Versão gratuita para cidadãos e planos premium para empresas de segurança privada ou condomínios que queiram painéis analíticos mais profundos.
-
-Parcerias Governamentais: Licenciamento da plataforma (SaaS) para prefeituras e órgãos de segurança pública utilizarem os dados analíticos de criminalidade para planejamento urbano.
-
-
-import os
-
-# Create the comprehensive README.md content tailored to the requirements sheet in the image
-readme_content = """# 🛡️ Cidade Segura - Monitoramento Comunitário Inteligente
-
-Uma plataforma moderna de segurança colaborativa e monitoramento comunitário desenvolvida para o Hackathon 2026. O sistema permite que cidadãos reportem ocorrências em tempo real, visualizem um mapa de calor de riscos locais e emitam alertas rápidos de emergência para a comunidade.
+## EQUIPE: SeleNai
 
 ---
 
-## 👥 Integrantes da Equipe
-* **Richard Jaime** - Administrador de Banco de Dados (DBA) & Desenvolvedor Backend
-* *(Demais integrantes da equipe podem ser adicionados aqui)*
+## 1. Integrantes da Equipe
+
+* Diego
+* Elvis
+* Kaloa
+* Pedro Henrique
+* Richard
 
 ---
 
-## 🛑 Problema / Desafio Abordado
-O crescimento da criminalidade urbana e a falta de canais rápidos, eficientes e anônimos para a comunicação de incidentes criam pontos cegos na segurança pública comunitária. Os métodos tradicionais são centralizados e lentos. 
+## 2. Escopo do Projeto
 
-**A Solução:** O **Cidade Segura** descentraliza e agiliza essa comunicação através de um mapeamento dinâmico em tempo real e de um botão de pânico comunitário, gerando dados cruciais para que moradores evitem zonas de perigo e tomem decisões preventivas.
+### O Problema e o Desafio Abordado
 
----
+A falta de segurança urbana e a escassez de informações centralizadas em tempo real sobre incidentes locais geram vulnerabilidade para os cidadãos. A ausência de um canal ágil dificulta a prevenção e a tomada de decisões rápidas pela comunidade para evitar áreas de risco.
 
-## 🛠️ Tecnologias Utilizadas
+### A Solução Proposta
 
-### Front-end
-* **HTML5 & CSS3:** Arquitetura estrutural e estilização customizada moderna (Tema Dark de monitoramento).
-* **JavaScript (Vanilla ES6):** Manipulação de estado, eventos dos formulários e interatividade.
-* **Leaflet.js & Mapas CARTO:** Biblioteca open-source para renderização de mapas dinâmicos e plotagem de geolocalização sem custos de API.
-* **Google Material Symbols:** Biblioteca de vetores para ícones de alta fidelidade e interface limpa.
-
-### Back-end
-* **Node.js:** Ambiente de execução assíncrono para o servidor.
-* **Express.js:** Framework minimalista e rápido para gerenciamento de rotas e APIs RESTful.
-* **CORS:** Mecanismo de segurança para liberação e controle de requisições entre domínios.
+O Cidade Segura é uma plataforma de segurança colaborativa que conecta moradores para aumentar a vigilância comunitária. Por meio de um mapa interativo e feed de alertas, o sistema descentraliza a comunicação de incidentes, permitindo que a própria comunidade mapeie ocorrências e previna situações de perigo de forma coletiva.
 
 ---
 
-## 🚀 Funcionalidades Implementadas
+## 3. Arquitetura da Aplicação e Tecnologias Utilizadas
 
-1. **Tela de Cadastro Seguro:** Criação de novas contas com criptografia visual integrada.
-2. **Autenticação Autônoma (Login):** Validação de credenciais e geração de tokens de sessão.
-3. **Dashboard de Monitoramento (Mapa Interativo):** Visualização geográfica de pontos críticos em tempo real utilizando mapas estilizados em modo escuro.
-4. **Feed Lateral de Alertas Rápidos:** Listagem em ordem cronológica de incidentes próximos divididos por níveis de criticidade (Crítico / Aviso).
-5. **Botão de Pânico / Emergência:** Acionamento de alerta instantâneo com um único clique para aviso imediato.
+A aplicação adota uma arquitetura desacoplada baseada em serviços (Client-Server), dividida em camadas de apresentação, lógica de negócios e persistência.
+
+### Árvore de Diretórios do Projeto
+
+
+cidade-segura/
+├── back-end/
+│   ├── server.js
+│   └── package.json
+└── front-end/
+    ├── css/
+    │   ├── login.css
+    │   └── style.css
+    ├── js/
+    │   ├── cadastro.js
+    │   ├── dashboard.js
+    │   ├── home.js
+    │   ├── index.js
+    │   └── login.js
+    ├── cadastro.html
+    ├── home.html
+    ├── index.html
+    └── login.html
+
+```
+
+### Tecnologias Utilizadas
+
+* **Front-end:** HTML5, CSS3, JavaScript estruturado (Vanilla ES6) para manipulação dinâmica do DOM, consumo de APIs e persistência local.
+* **Mapas e Geolocalização:** Leaflet.js API integrada ao provedor CARTO (Dark Matter Basemaps) para renderização do mapa tático sem custos de licenciamento.
+* **Back-end:** Node.js com o framework Express.js para criação de rotas HTTP, tratamento de requisições JSON e controle de cabeçalhos CORS.
+* **Banco de Dados (Conceitual):** PostgreSQL para persistência estruturada e relacional de longo prazo.
 
 ---
 
-## 🗄️ Estrutura do Banco de Dados
+## 4. Funcionalidades Implementadas
 
-O projeto utiliza um modelo relacional/documental estruturado para garantir a integridade dos dados e o anonimato das denúncias quando solicitado.
+* **Apresentação Institucional:** Página de introdução (Home) com carrossel dinâmico responsivo apresentando os pilares do ecossistema.
+* **Controle de Acesso:** Telas completas de Login e Cadastro com tratamento de eventos e validações no lado do cliente.
+* **Dashboard de Monitoramento Interativo:** Mapa integrado em modo escuro com exibição geográfica de raios de risco baseados em incidentes cadastrados.
+* **Feed Reativo de Ocorrências:** Painel lateral síncrono que classifica alertas em níveis de criticidade e permite a remoção local de marcadores.
+* **Registro Dinâmico de Denúncias:** Formulário em janela modal que envia dados estruturados ao backend via requisições assíncronas (Fetch API) e atualiza o mapa em tempo real.
+* **Mecanismo de Emergência:** Botão de pânico de alta prioridade projetado para despachar transmissões instantâneas de alertas graves.
+* **Gerenciamento de Perfil:** Atualização de dados cadastrais na interface e upload dinâmico de foto de usuário via API FileReader.
 
-### Entidade: `usuarios` (Usuários do Sistema)
+---
+
+## 5. Estrutura do Banco de Dados
+
+### Tabela: Usuarios
+
+* `id` (Chave Primária)
+* `nome` (Texto, Opcional)
+* `email` (Texto, Único)
+* `senha` (Texto, Criptografada)
+
+### Tabela: Denuncias
+
+* `id` (Chave Primária)
+* `tipo_incidente` (Texto)
+* `descricao` (Texto)
+* `latitude` (Decimal)
+* `longitude` (Decimal)
+* `data_hora` (Timestamp)
+* `status` (Texto)
+
+### Tabela: Alertas
+
+* `id` (Chave Primária)
+* `denuncia_id` (Chave Estrangeira referenciando Denuncias)
+* `raio_alcance` (Inteiro, em metros)
+* `data_envio` (Timestamp)
+
+---
+
+## 6. Modelo de Negócio e Monetização
+
+O projeto adota uma estratégia de mercado híbrida com foco social e corporativo:
+
+* **Modelo Freemium e Parcerias B2B:** Acesso integral e gratuito dos recursos para os cidadãos, aliado à oferta de planos corporativos com dashboards de auditoria detalhados e relatórios de métricas preditivas para condomínios residenciais e empresas de segurança privada.
+* **Parcerias Governamentais (SaaS):** Licenciamento da plataforma para prefeituras, órgãos de planejamento urbano e secretarias de segurança pública, fornecendo dados analíticos consolidados de criminalidade e manchas de calor para otimização de recursos públicos.
+
+---
+
+## 7. Instruções para Instalação e Execução
+
+### Configuração e Execução do Back-end
+
+1. Navegue até o diretório do servidor: `cd back-end`
+2. Instale as dependências declaradas no manifesto: `npm install`
+3. Inicie o servidor Node.js: `node server.js`
+4. A API estará operacional no endereço: `http://localhost:3000`
+
+### Configuração e Execução do Front-end
+
+1. Certifique-se de manter a estrutura de pastas do front-end com os arquivos HTML na raiz e as pastas `/css` e `/js` nos locais indicados.
+2. Inicialize o projeto executando o arquivo `home.html` por meio de um servidor web local (como a extensão Live Server do VS Code).
+3. O fluxo de testes pode ser iniciado pela tela institucional, avançando para os formulários de autenticação e acessando o painel de gerenciamento do mapas.
