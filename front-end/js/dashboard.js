@@ -58,26 +58,53 @@ if (profileTrigger && profileDropdown) {
 }
 
 // ==========================================
-// 4. BOTÃO DE EXCLUIR CONTA COM REDIRECIONAMENTO
+// 4. BOTÃO DE EXCLUIR CONTA COM REDIRECIONAMENTO (MODERNO)
 // ==========================================
-// Usamos o IF para garantir que o código só rode se o botão existir na tela atual
 if (deleteAccountBtn) {
-    // Altera o estilo via JS se necessário
-    deleteAccountBtn.style.backgroundColor = '#e74c3c';
+    // Mantém a estilização base via JS se necessário (com um vermelho mais moderno e suave)
+    deleteAccountBtn.style.backgroundColor = '#ef4444';
 
     deleteAccountBtn.addEventListener('click', (e) => {
         e.preventDefault(); // Previne o comportamento padrão do link '#'
 
-        const confirmDelete = confirm('⚠️ Tem certeza que deseja excluir sua conta? Esta ação é irreversível!');
+        // Substitui o 'confirm()' nativo por um modal Dark elegante
+        Swal.fire({
+            title: '🚨 AVISO CRÍTICO',
+            text: 'Tem certeza que deseja excluir sua conta? Esta ação é irreversível!',
+            icon: 'error',
+            showCancelButton: true,
+            confirmButtonColor: '#dc2626', // Vermelho vibrante para ação destrutiva
+            cancelButtonColor: '#475569',  // Cinza ardósia elegante para cancelar
+            confirmButtonText: 'Sim, excluir minha conta',
+            cancelButtonText: 'Cancelar',
+            background: '#0f172a',         // Fundo escuro idêntico ao seu dashboard
+            color: '#f8fafc',              // Texto claro
+            iconColor: '#ef4444',          // Cor do ícone de erro
+            customClass: {
+                popup: 'border-modal-custom' // Classe opcional para adicionar borda via CSS
+            }
+        }).then((result) => {
+            // Se o usuário confirmou a exclusão
+            if (result.isConfirmed) {
+                // 1. Limpa os dados do usuário salvos no navegador
+                localStorage.removeItem('usuario_nome');
+                localStorage.removeItem('usuario_email');
+                localStorage.removeItem('usuario_telefone'); 
 
-        if (confirmDelete) {
-            // 1. Limpa os dados do usuário salvos no navegador
-            localStorage.removeItem('usuario_nome');
-            localStorage.removeItem('usuario_email');
-            localStorage.removeItem('usuario_telefone'); 
-
-            alert(' canivete Sua conta foi excluída com sucesso (Simulação local).');
-            window.location.href = 'home.html';
-        }
+                // 2. Substitui o 'alert()' nativo por um modal de sucesso antes de redirecionar
+                Swal.fire({
+                    title: 'Conta Excluída',
+                    text: 'Sua conta foi excluída com sucesso.',
+                    icon: 'success',
+                    confirmButtonColor: '#38bdf8', // Azul neon do seu tema para o botão de fechar
+                    background: '#0f172a',
+                    color: '#f8fafc',
+                    iconColor: '#22c55e'
+                }).then(() => {
+                    // Redireciona apenas após o usuário clicar em "OK" no modal de sucesso
+                    window.location.href = 'home.html';
+                });
+            }
+        });
     });
 }

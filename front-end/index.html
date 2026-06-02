@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="../front-end/css/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="css/index.css">
-
+    <!-- Inclusão do SweetAlert2 para alertas e confirmações bonitas -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body class="dashboard-body">
 
@@ -22,7 +23,7 @@
             <a href="#" id="menu-inicio" class="menu-item active" onclick="showSection('inicio')">
                 <span class="material-symbols-outlined">space_dashboard</span> Início
             </a>
-            <a href="#" class="menu-item" onclick="alert('Filtro de ocorrências frequentes em desenvolvimento.')">
+            <a href="#" id="menu-frequentes" class="menu-item" onclick="mostrarNotificacao('Filtro de ocorrências frequentes em desenvolvimento.', 'aviso', 'construction')">
                 <span class="material-symbols-outlined">warning</span> Ocorrências Frequentes
             </a>
             <a href="#" class="menu-item btn-trigger-denuncia" onclick="toggleModal()">
@@ -36,7 +37,7 @@
             </a>
             
             <div class="sidebar-footer">
-                <a href="#" class="menu-item text-muted" onclick="alert('Cidade Segura v1.2 - Hackathon 2026')">
+                <a href="#" class="menu-item text-muted" onclick="mostrarNotificacao('Cidade Segura v1.2 - Hackathon 2026', 'sucesso', 'info')">
                     <span class="material-symbols-outlined">info</span> Sobre Nós
                 </a>
             </div>
@@ -47,7 +48,7 @@
         <header class="top-navbar">
             <div class="nav-links-left">
                 <a href="#" id="nav-inicio" class="nav-link active" onclick="showSection('inicio')">Início</a>
-                <a href="#" class="nav-link" onclick="alert('Cidade Segura v1.2 - Hackathon 2026')">Sobre Nós</a>
+                <a href="#" class="nav-link" onclick="mostrarNotificacao('Cidade Segura v1.2 - Hackathon 2026', 'sucesso', 'info')">Sobre Nós</a>
                 <a href="#" id="nav-denuncias" class="nav-link" onclick="showSection('denuncias')">Suas Denúncias</a>
             </div>
             
@@ -74,13 +75,13 @@
                             Sair do Sistema
                         </a>
                         <hr class="dropdown-divider">
-                        <a href="#" class="delete-account-btn" id="deleteAccountBtn">
+                        <!-- Adicionado o onclick para disparar a função de exclusão bonita -->
+                        <a href="#" class="delete-account-btn" id="deleteAccountBtn" onclick="excluirMinhaConta(event)">
                             <span class="material-symbols-outlined">delete_forever</span>
                             Excluir Conta
                         </a>
                     </div>
                 </div>
-
             </div>
         </header>
 
@@ -153,6 +154,13 @@
                         <span class="material-symbols-outlined">save</span> Salvar Alterações
                     </button>
                 </form>
+
+                <div class="delete-account-container">
+                    <!-- Adicionado o onclick para disparar a função de exclusão bonita -->
+                    <button type="button" class="btn-delete-account-panel" id="panelDeleteAccountBtn" onclick="excluirMinhaConta(event)">
+                        <span class="material-symbols-outlined">delete_forever</span> Excluir Minha Conta Permanentemente
+                    </button>
+                </div>
             </div>
 
             <div class="alerts-side-panel">
@@ -229,5 +237,12 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="js/dashboard.js"></script>
     <script src="js/index.js"></script>
+    <!-- ... outros elementos do seu dashboard ... -->
+
+    <!-- 1. INSIRA ESTA LINHA EXATAMENTE AQUI (LINHA NOVA) -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Este é o seu script que você já deve ter aí: -->
+    <script src="js/dashboard.js"></script> 
 </body>
 </html>

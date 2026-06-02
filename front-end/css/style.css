@@ -1,4 +1,4 @@
- /* ==========================================
+/* ==========================================
    1. RESET UNIVERSAL SEGURO 
    (Protege o mapa Leaflet de sumir)
    ========================================== */
@@ -19,7 +19,68 @@
 /* ==========================================
    2. ESTRUTURA DO DASHBOARD PRINCIPAL
    ========================================== */
+/* ==========================================
+   2. ESTRUTURA DO DASHBOARD PRINCIPAL
+   ========================================== */
 .dashboard-body {
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-start;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    background-color: #080c14;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Garante que o conteúdo principal use a altura total */
+    min-width: 0;   /* Evita bugs de quebra de layout com o Leaflet */
+}
+
+/* ==========================================
+   3. VIEWPORT E MAPA (Correção do corte vazio)
+   ========================================== */
+.dashboard-viewport {
+    flex: 1;       /* Faz o container ocupar TODO o espaço abaixo da navbar */
+    display: flex;
+    padding: 20px;
+    gap: 20px;
+    height: calc(100vh - 70px); /* Desconta exatamente a altura da navbar */
+    min-height: 0; /* ESSENCIAL para o Leaflet não estourar o container */
+}
+
+.map-wrapper {
+    flex: 3;
+    height: 100%;  /* Força o wrapper a preencher toda a altura disponível */
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(56, 189, 248, 0.15);
+}
+
+#map {
+    width: 100%;
+    height: 100%;  /* O mapa agora vai esticar até o final da tela */
+}
+
+.alerts-side-panel {
+    flex: 1;
+    height: 100%;  /* Faz o painel lateral de alertas também acompanhar o mapa */
+    background-color: #0f172a;
+    border-radius: 12px;
+    border: 1px solid rgba(56, 189, 248, 0.15);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    overflow-y: auto; /* Mantém a barra de rolagem apenas dentro do painel */
+}
+
+
+   .dashboard-body {
     display: flex;
     align-items: stretch;
     justify-content: flex-start;
@@ -180,7 +241,7 @@
     display: flex;
     padding: 20px;
     gap: 20px;
-    height: calc(100vh - 70px); /* Garante altura perfeita na tela */
+    height: calc(100vh - 70px);
     min-height: 0;
 }
 
@@ -202,7 +263,8 @@
     top: 15px;
     right: 15px;
     z-index: 1000;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(15, 23, 42, 0.9);
+    color: #f8fafc;
     padding: 8px 14px;
     border-radius: 20px;
     font-size: 12px;
@@ -210,6 +272,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
+    backdrop-filter: blur(4px);
 }
 
 .status-indicator {
@@ -222,7 +285,7 @@
 }
 
 /* ==========================================
-   4. PAINEL DE ALERTAS LATERAIS
+   4. PAINEL DE ALERTAS LATERAIS (MELHORADO)
    ========================================== */
 .alerts-side-panel {
     flex: 1;
@@ -248,20 +311,31 @@
 }
 
 .feed-card {
-    background-color: #d9dadd;
+    background-color: #1e293b; /* Ajustado de cinza claro para modo escuro profissional */
     border-radius: 8px;
-    padding: 12px;
+    padding: 14px;
     border-left: 4px solid #fff;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease;
+}
+
+.feed-card:hover {
+    transform: translateY(-2px);
 }
 
 .feed-card.critical { border-left-color: #ef4444; }
 .feed-card.warning { border-left-color: #eab308; }
 
+.feed-card p strong {
+    color: #f1f5f9; /* Texto claro no título do card */
+}
+
 .feed-header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     font-size: 11px;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
 }
 
 .badge {
@@ -272,10 +346,30 @@
 .warning .badge { color: #eab308; }
 
 .time { color: #64748b; }
+
 .location {
     font-size: 12px;
-    color: #000000;
-    margin-top: 4px;
+    color: #94a3b8; /* Cor suave para a localização */
+    margin-top: 6px;
+}
+
+/* Botão Bonito de Lixeira nos Alertas */
+.btn-delete-alert {
+    background: transparent;
+    border: none;
+    color: #64748b;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.btn-delete-alert:hover {
+    color: #ef4444;
+    background-color: rgba(239, 68, 68, 0.1);
 }
 
 /* ==========================================
@@ -487,7 +581,6 @@
     transform: translateY(1px);
 }
 
-/* Opcional: Garante rodapé legível */
 .card-footer {
     text-align: center;
     margin-top: 25px;
@@ -499,4 +592,89 @@
     align-items: center;
     gap: 8px;
     width: 100%;
+}
+
+/* ==========================================
+   6. CONTAINER DE NOTIFICAÇÕES (TOAST)
+   ========================================== */
+.toast-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.toast-card {
+    background: #0f172a;
+    color: #ffffff;
+    padding: 14px 20px;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    min-width: 320px;
+    border-left: 5px solid #38bdf8;
+    transform: translateX(120%);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.toast-card.show {
+    transform: translateX(0);
+}
+
+.toast-card.sucesso { border-left-color: #22c55e; }
+.toast-card.perigo { border-left-color: #ef4444; }
+.toast-card.aviso { border-left-color: #eab308; }
+
+.toast-icon {
+    font-family: 'Material Symbols Outlined' !important;
+    font-size: 20px;
+}
+
+/* ==========================================
+   7. SEÇÃO E BOTÃO DE EXCLUSÃO
+   ========================================== */
+.delete-account-container {
+    width: 100%;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px dashed rgba(239, 68, 68, 0.2);
+    display: flex;
+    justify-content: center;
+}
+
+.btn-delete-account-panel {
+    background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+    border: 1px solid #ef4444;
+    color: #ffffff;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+    transition: all 0.2s ease;
+    width: 100%;
+    justify-content: center;
+}
+
+.btn-delete-account-panel:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(239, 68, 68, 0.4);
+}
+
+/* Adicione na última linha do seu arquivo css/index.css */
+
+.border-modal-custom {
+    border: 1px solid rgba(56, 189, 248, 0.2) !important;
+    border-radius: 12px !important;
 }

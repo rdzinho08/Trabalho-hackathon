@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cidade Segura - Sobre Nós</title>
+    <!-- Google Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    
+    <style>
+        /* =========================================================================
+           1. RESETS E CORES (Alinhados com a imagem_39c4e8.jpg)
+           ========================================================================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        body {
+            background-color: #080c14;
+            color: #f8fafc;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* =========================================================================
+           2. NAVBAR REPLICADA DA LANDING PAGE
+           ========================================================================= */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background-color: rgba(8, 12, 20, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(56, 189, 248, 0.08);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #fff;
+            font-weight: 700;
+            font-size: 20px;
+            text-decoration: none;
+        }
+
+        .brand-logo-icon {
+            color: #38bdf8;
+            font-size: 24px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-link {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: #38bdf8;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .btn-entrar {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            padding: 8px 18px;
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-entrar:hover {
+            color: #fff;
+            border-color: #38bdf8;
+            background-color: rgba(56, 189, 248, 0.05);
+        }
+
+        .btn-cadastrar {
+            background-color: #38bdf8;
+            color: #080c14;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 700;
+            padding: 8px 20px;
+            border-radius: 6px;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .btn-cadastrar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(56, 189, 248, 0.5);
+        }
+
+        /* =========================================================================
+           3. HERO SECTION (SOBRE)
+           ========================================================================= */
+        .about-hero {
+            padding: 180px 8% 80px 8%;
+            text-align: center;
+            position: relative;
+            background: radial-gradient(circle at top, rgba(56, 189, 248, 0.08) 0%, transparent 60%);
+        }
+
+        .badge-tech {
+            display: inline-block;
+            background-color: rgba(56, 189, 248, 0.1);
+            color: #38bdf8;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            margin-bottom: 25px;
+        }
+
+        .about-hero h1 {
+            font-size: 48px;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .about-hero h1 span {
+            color: #38bdf8;
+        }
+
+        .about-hero p {
+            font-size: 18px;
+            color: #94a3b8;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* =========================================================================
+           4. SEÇÃO HISTÓRIA & PROPÓSITO
+           ========================================================================= */
+        .content-section {
+            padding: 60px 8%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .text-block h2 {
+            font-size: 32px;
+            color: #fff;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .text-block p {
+            color: #94a3b8;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        /* Grid de Cards de Missão/Visão */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .info-card {
+            background-color: #0f172a;
+            border: 1px solid rgba(56, 189, 248, 0.1);
+            border-radius: 12px;
+            padding: 25px;
+            display: flex;
+            gap: 20px;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateX(5px);
+            border-color: rgba(56, 189, 248, 0.3);
+        }
+
+        .card-icon-wrapper {
+            background-color: rgba(56, 189, 248, 0.1);
+            color: #38bdf8;
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .info-card h3 {
+            color: #fff;
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        /* =========================================================================
+           5. SEÇÃO DOS NÚMEROS / CONTADORES ANIMADOS
+           ========================================================================= */
+        .counter-section {
+            background-color: #0e1625;
+            border-top: 1px solid rgba(56, 189, 248, 0.08);
+            border-bottom: 1px solid rgba(56, 189, 248, 0.08);
+            padding: 60px 8%;
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .counter-box h2 {
+            font-size: 42px;
+            color: #38bdf8;
+            font-weight: 800;
+            margin-bottom: 5px;
+            text-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+        }
+
+        .counter-box p {
+            color: #64748b;
+            font-size: 14px;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        /* =========================================================================
+           6. FOOTER SIMPLES
+           ========================================================================= */
+        footer {
+            padding: 40px 8%;
+            text-align: center;
+            color: #64748b;
+            font-size: 14px;
+            border-top: 1px solid rgba(56, 189, 248, 0.05);
+        }
+
+        /* Responsividade Básica */
+        @media (max-width: 768px) {
+            .content-section { grid-template-columns: 1fr; gap: 40px; }
+            .navbar { padding: 20px 5%; }
+            .nav-links { display: none; } /* Oculta links no mobile para simplificar */
+            .about-hero h1 { font-size: 36px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <a href="home.html" class="nav-brand">
+            <span class="material-symbols-outlined brand-logo-icon">shield_with_heart</span>
+            Cidade Segura
+        </a>
+        <div class="nav-links">
+            <a href="home.html" class="nav-link">Home</a>
+            <a href="#" class="nav-link active">Sobre</a>
+            <a href="home.html#recursos" class="nav-link">Recursos</a>
+        </div>
+        <div class="nav-actions">
+            <a href="login.html" class="btn-entrar">Entrar</a>
+            <a href="cadastro.html" class="btn-cadastrar">Cadastrar-se</a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="about-hero">
+        <span class="badge-tech">Nossa Missão Coletiva</span>
+        <h1>Tecnologia para uma cidade <span>mais colaborativa</span>.</h1>
+        <p>O Cidade Segura nasceu com o propósito de aproximar os cidadãos da gestão urbana de Florianópolis através de um ecossistema digital inteligente, transparente e focado em prevenção.</p>
+    </header>
+
+    <!-- COUNTER / NÚMEROS IMPORTANTES -->
+    <section class="counter-section">
+        <div class="counter-box">
+            <h2 class="counter" data-target="15000">0</h2>
+            <p>Moradores Ativos</p>
+        </div>
+        <div class="counter-box">
+            <h2 class="counter" data-target="94">0</h2>
+            <p>% de Precisão nos Alertas</p>
+        </div>
+        <div class="counter-box">
+            <h2 class="counter" data-target="120">0</h2>
+            <p>Bairros Conectados</p>
+        </div>
+    </section>
+
+    <!-- CONTEÚDO PRINCIPAL (HISTÓRIA E PILARES) -->
+    <section class="content-section">
+        <div class="text-block">
+            <h2>Como transformamos dados em segurança real</h2>
+            <p>Acreditamos que a verdadeira inteligência urbana não vem apenas de sensores ou câmeras isoladas, mas sim do poder de uma comunidade engajada e atenta.</p>
+            <p>Nossa plataforma centraliza notificações de incidentes, mapeamento de áreas de risco e análises preditivas em tempo real. Cada morador atua como um elo fundamental na proteção do seu bairro, gerando dados cruciais que auxiliam no monitoramento preventivo diário em Florianópolis.</p>
+        </div>
+
+        <div class="cards-grid">
+            <!-- Card 1 -->
+            <div class="info-card">
+                <div class="card-icon-wrapper">
+                    <span class="material-symbols-outlined">groups</span>
+                </div>
+                <div>
+                    <h3>Cidadania Ativa</h3>
+                    <p>Fomentamos uma rede de apoio mútuo onde a informação circula de forma rápida e segura para proteger a todos.</p>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="info-card">
+                <div class="card-icon-wrapper">
+                    <span class="material-symbols-outlined">distance</span>
+                </div>
+                <div>
+                    <h3>Monitoramento Geográfico</h3>
+                    <p>Mapas interativos de alta precisão baseados no Leaflet para visualização rápida de focos de atenção urbana.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Cidade Segura. Desenvolvido para transformar a infraestrutura social de Florianópolis.</p>
+    </footer>
+
+    <!-- LOGICA JAVASCRIPT DOS CONTADORES -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const counters = document.querySelectorAll('.counter');
+            const speed = 60; // Quanto menor, mais rápido o contador sobe
+
+            const startCounters = () => {
+                counters.forEach(counter => {
+                    const updateCount = () => {
+                        const target = +counter.getAttribute('data-target');
+                        const count = +counter.innerText;
+                        
+                        // Garante um incremento dinâmico baseado no tamanho do alvo
+                        const increment = Math.ceil(target / speed);
+
+                        if (count < target) {
+                            counter.innerText = count + increment > target ? target : count + increment;
+                            setTimeout(updateCount, 25);
+                        } else {
+                            counter.innerText = target;
+                        }
+                    };
+                    updateCount();
+                });
+            };
+
+            // Dispara a animação assim que a página carrega
+            startCounters();
+        });
+    </script>
+</body>
+</html>
